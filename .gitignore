@@ -1,0 +1,48 @@
+__pycache__/
+*__pycache__
+*__pycache__*
+*cuda*
+*cudnn*
+*downloadedData*
+*data*
+
+
+# output dir
+detectron2/output
+detectron2/instant_test_output
+detectron2/inference_test_output
+
+
+*.jpg
+*.png
+*.txt
+
+# compilation and distribution
+__pycache__
+_ext
+*.pyc
+*.so
+detectron2/detectron2.egg-info/
+detectron2/build/
+detectron2/dist/
+
+# pytorch/python/numpy formats
+*.pth
+*.pkl
+*.npy
+
+# ipython/jupyter notebooks
+**/.ipynb_checkpoints/
+
+# Editor temporaries
+*.swn
+*.swo
+*.swp
+*~
+
+# Pycharm editor settings
+detectron2/.idea
+
+# project dirs
+detectron2/datasets
+detectron2/models
