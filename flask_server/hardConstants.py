@@ -1,6 +1,6 @@
 from classes import *
-configPath = '/home/roadzen/ParasWork/ConUHack2020/data/config.yaml'
-weightsPath = '/home/roadzen/ParasWork/ConUHack2020/data/model_final.pth'
+configPath = '/home/roadzen/ParasWork/ConUHack2020/detectron_2/CarTrainedModels/config.yaml'
+weightsPath = '/home/roadzen/ParasWork/ConUHack2020/detectron_2/CarTrainedModels/model_0029999.pth'
 thresh = 0.01
 nms = 0.2
 SERVER_PORT = 8082
