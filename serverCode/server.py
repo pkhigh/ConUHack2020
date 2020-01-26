@@ -2,7 +2,7 @@ import sys
 from dataParsingFunctions import *
 from modelClass import *
 from hardConstants import *
-
+from modelCheck import *
 
 CAR_MODEL = model()
 CAR_MODEL.configPath = configPath
