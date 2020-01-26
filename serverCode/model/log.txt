@@ -1,0 +1,982 @@
+[01/26 13:57:08] detectron2 INFO: Rank of current process: 0. World size: 1
+[01/26 13:57:09] detectron2 INFO: Environment info:
+------------------------  --------------------------------------------------------------------
+sys.platform              linux
+Python                    3.6.10 |Anaconda, Inc.| (default, Jan  7 2020, 21:14:29) [GCC 7.3.0]
+Numpy                     1.18.1
+Detectron2 Compiler       GCC 5.4
+Detectron2 CUDA Compiler  10.1
+DETECTRON2_ENV_MODULE     <not set>
+PyTorch                   1.4.0
+PyTorch Debug Build       False
+torchvision               0.5.0
+CUDA available            True
+GPU 0                     GeForce RTX 2080 Ti
+CUDA_HOME                 /usr/local/cuda
+NVCC                      Cuda compilation tools, release 10.1, V10.1.243
+Pillow                    7.0.0
+cv2                       4.1.2
+------------------------  --------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - Intel(R) Math Kernel Library Version 2019.0.4 Product Build 20190411 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v0.21.1 (Git Hash 7d2fd500bc78936d1d648ca713b901012f470dbc)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CUDA Runtime 10.1
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 7.6.3
+  - Magma 2.5.1
+  - Build settings: BLAS=MKL, BUILD_NAMEDTENSOR=OFF, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -fopenmp -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Wno-stringop-overflow, DISABLE_NUMA=1, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_STATIC_DISPATCH=OFF, 
+
+[01/26 13:57:09] detectron2 INFO: Command line arguments: Namespace(config_file='/home/roadzen/ParasWork/ConUHack2020/detectron_2/configs/COCO-InstanceSegmentation/car.yaml', dist_url='tcp://127.0.0.1:50152', eval_only=True, machine_rank=0, num_gpus=1, num_machines=1, opts=['MODEL.WEIGHTS', '/home/roadzen/ParasWork/ConUHack2020/detectron_2/CarTrainedModels/model_final.pth', 'OUTPUT_DIR', '/home/roadzen/ParasWork/ConUHack2020/data/evaluationDamageModels/model_final/', 'MODEL.RPN.NMS_THRESH', '0.2', 'MODEL.ROI_HEADS.NMS_THRESH_TEST', '0.2'], resume=False)
+[01/26 13:57:09] detectron2 INFO: Contents of args.config_file=/home/roadzen/ParasWork/ConUHack2020/detectron_2/configs/COCO-InstanceSegmentation/car.yaml:
+_BASE_: "mask_rcnn_R_50_FPN_3x.yaml"
+DATASETS:
+ TRAIN: ("car_train",)
+ TEST: ("car_val",)
+DATALOADER:
+ NUM_WORKERS: 4
+ FILTER_EMPTY_ANNOTATIONS: False
+MODEL:
+ WEIGHTS: "/home/roadzen/ParasWork/PretrainedWeights/dt2/mask_rcnn_R_50_FPN_3x.pkl"
+ ROI_HEADS:
+  BATCH_SIZE_PER_IMAGE: 128   
+  NUM_CLASSES: 196 
+  SCORE_THRESH_TEST: 0.01
+  NMS_THRESH_TEST: 0.5
+  IOU_THRESHOLDS: 
+  - 0.5
+ RPN:
+  NMS_THRESH: 0.5
+  IOU_THRESHOLDS:
+  - 0.5
+  - 0.7
+  IN_FEATURES:
+  - p3
+  - p4
+  - p5
+  - p6
+ ANCHOR_GENERATOR:
+  SIZES:
+  - - 64
+  - - 128
+  - - 256
+  - - 512
+ ROI_MASK_HEAD:
+  POOLER_RESOLUTION: 14
+ ROI_BOX_HEAD:
+  POOLER_RESOLUTION: 7
+SOLVER:
+ IMS_PER_BATCH: 4
+ BASE_LR: 0.0025
+ STEPS:
+ - 60000
+ - 70000
+ MAX_ITER: 80000
+ CHECKPOINT_PERIOD: 10000
+INPUT:
+ MIN_SIZE_TRAIN:
+ - 448
+ MAX_SIZE_TEST: 448
+ MAX_SIZE_TRAIN: 448
+ MIN_SIZE_TEST: 448 
+OUTPUT_DIR: "CarTrainedModels"
+[01/26 13:57:09] detectron2 INFO: Running with full config:
+CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: False
+  NUM_WORKERS: 4
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  TEST: ('car_val',)
+  TRAIN: ('car_train',)
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: False
+    SIZE: [0.9, 0.9]
+    TYPE: relative_range
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 448
+  MAX_SIZE_TRAIN: 448
+  MIN_SIZE_TEST: 448
+  MIN_SIZE_TRAIN: (448,)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    SIZES: [[64], [128], [256], [512]]
+  BACKBONE:
+    FREEZE_AT: 2
+    NAME: build_resnet_fpn_backbone
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    NORM: 
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_ON: True
+  META_ARCHITECTURE: GeneralizedRCNN
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [103.53, 116.28, 123.675]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: False
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: FastRCNNConvFCHead
+    NORM: 
+    NUM_CONV: 0
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: StandardROIHeads
+    NMS_THRESH_TEST: 0.2
+    NUM_CLASSES: 196
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.01
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: 
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: -1
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.5, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.2
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 1000
+    POST_NMS_TOPK_TRAIN: 1000
+    PRE_NMS_TOPK_TEST: 1000
+    PRE_NMS_TOPK_TRAIN: 2000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: /home/roadzen/ParasWork/ConUHack2020/detectron_2/CarTrainedModels/model_final.pth
+OUTPUT_DIR: /home/roadzen/ParasWork/ConUHack2020/data/evaluationDamageModels/model_final/
+SEED: -1
+SOLVER:
+  BASE_LR: 0.0025
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 10000
+  GAMMA: 0.1
+  IMS_PER_BATCH: 4
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 80000
+  MOMENTUM: 0.9
+  STEPS: (60000, 70000)
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 4000
+    MIN_SIZES: (400, 500, 600, 700, 800, 900, 1000, 1100, 1200)
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 0
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+VERSION: 2
+[01/26 13:57:09] detectron2 INFO: Full config saved to /home/roadzen/ParasWork/ConUHack2020/data/evaluationDamageModels/model_final/config.yaml
+[01/26 13:57:09] d2.utils.env INFO: Using a generated random seed 9453859
+[01/26 13:57:11] d2.engine.defaults INFO: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (roi_heads): StandardROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (box_head): FastRCNNConvFCHead(
+      (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+      (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+    )
+    (box_predictor): FastRCNNOutputLayers(
+      (cls_score): Linear(in_features=1024, out_features=197, bias=True)
+      (bbox_pred): Linear(in_features=1024, out_features=784, bias=True)
+    )
+    (mask_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(14, 14), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(14, 14), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(14, 14), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(14, 14), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (mask_head): MaskRCNNConvUpsampleHead(
+      (mask_fcn1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (deconv): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      (predictor): Conv2d(256, 196, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+[01/26 13:57:11] fvcore.common.checkpoint INFO: Loading checkpoint from /home/roadzen/ParasWork/ConUHack2020/detectron_2/CarTrainedModels/model_final.pth
+[01/26 13:57:12] d2.data.datasets.coco INFO: Loaded 8041 images in COCO format from datasets/car/annotations/instances_val2014.json
+[01/26 13:57:12] d2.data.build INFO: Distribution of training instances among all 196 categories:
+[36m|   category    | #instances   |   category    | #instances   |   category    | #instances   |
+|:-------------:|:-------------|:-------------:|:-------------|:-------------:|:-------------|
+| AM General .. | 44           | Acura RL Se.. | 32           | Acura TL Se.. | 43           |
+| Acura TL Ty.. | 42           | Acura TSX S.. | 40           | Acura Integ.. | 44           |
+| Acura ZDX H.. | 39           | Aston Marti.. | 45           | Aston Marti.. | 41           |
+| Aston Marti.. | 33           | Aston Marti.. | 38           | Audi RS 4 C.. | 36           |
+| Audi A5 Cou.. | 41           | Audi TTS Co.. | 42           | Audi R8 Cou.. | 43           |
+| Audi V8 Sed.. | 43           | Audi 100 Se.. | 40           | Audi 100 Wa.. | 42           |
+| Audi TT Hat.. | 40           | Audi S6 Sed.. | 46           | Audi S5 Con.. | 42           |
+| Audi S5 Cou.. | 42           | Audi S4 Sed.. | 39           | Audi S4 Sed.. | 45           |
+| Audi TT RS .. | 39           | BMW ActiveH.. | 34           | BMW 1 Serie.. | 35           |
+| BMW 1 Serie.. | 41           | BMW 3 Serie.. | 42           | BMW 3 Serie.. | 41           |
+| BMW 6 Serie.. | 44           | BMW X5 SUV .. | 41           | BMW X6 SUV .. | 42           |
+| BMW M3 Coup.. | 44           | BMW M5 Seda.. | 41           | BMW M6 Conv.. | 41           |
+| BMW X3 SUV .. | 38           | BMW Z4 Conv.. | 40           | Bentley Con.. | 36           |
+| Bentley Arn.. | 39           | Bentley Mul.. | 35           | Bentley Con.. | 34           |
+| Bentley Con.. | 46           | Bentley Con.. | 44           | Bugatti Vey.. | 32           |
+| Bugatti Vey.. | 43           | Buick Regal.. | 35           | Buick Raini.. | 42           |
+| Buick Veran.. | 37           | Buick Encla.. | 42           | Cadillac CT.. | 43           |
+| Cadillac SR.. | 41           | Cadillac Es.. | 44           | Chevrolet S.. | 40           |
+| Chevrolet C.. | 39           | Chevrolet C.. | 46           | Chevrolet C.. | 37           |
+| Chevrolet T.. | 44           | Chevrolet C.. | 44           | Chevrolet H.. | 36           |
+| Chevrolet I.. | 43           | Chevrolet T.. | 37           | Chevrolet S.. | 44           |
+| Chevrolet E.. | 29           | Chevrolet A.. | 45           | Chevrolet C.. | 41           |
+| Chevrolet M.. | 38           | Chevrolet T.. | 40           | Chevrolet S.. | 38           |
+| Chevrolet S.. | 42           | Chevrolet E.. | 35           | Chevrolet M.. | 45           |
+| Chevrolet M.. | 44           | Chevrolet S.. | 43           | Chevrolet S.. | 44           |
+| Chrysler As.. | 43           | Chrysler Se.. | 40           | Chrysler To.. | 37           |
+| Chrysler 30.. | 48           | Chrysler Cr.. | 43           | Chrysler PT.. | 45           |
+| Daewoo Nubi.. | 45           | Dodge Calib.. | 40           | Dodge Calib.. | 42           |
+| Dodge Carav.. | 43           | Dodge Ram P.. | 42           | Dodge Ram P.. | 44           |
+| Dodge Sprin.. | 39           | Dodge Journ.. | 44           | Dodge Dakot.. | 41           |
+| Dodge Dakot.. | 38           | Dodge Magnu.. | 40           | Dodge Chall.. | 39           |
+| Dodge Duran.. | 43           | Dodge Duran.. | 45           | Dodge Charg.. | 41           |
+| Dodge Charg.. | 42           | Eagle Talon.. | 46           | FIAT 500 Ab.. | 27           |
+| FIAT 500 Co.. | 33           | Ferrari FF .. | 42           | Ferrari Cal.. | 39           |
+| Ferrari 458.. | 39           | Ferrari 458.. | 42           | Fisker Karm.. | 43           |
+| Ford F-450 .. | 41           | Ford Mustan.. | 44           | Ford Freest.. | 44           |
+| Ford Expedi.. | 44           | Ford Edge S.. | 43           | Ford Ranger.. | 42           |
+| Ford GT Cou.. | 45           | Ford F-150 .. | 42           | Ford F-150 .. | 45           |
+| Ford Focus .. | 45           | Ford E-Seri.. | 37           | Ford Fiesta.. | 42           |
+| GMC Terrain.. | 41           | GMC Savana .. | 68           | GMC Yukon H.. | 42           |
+| GMC Acadia .. | 44           | GMC Canyon .. | 40           | Geo Metro C.. | 44           |
+| HUMMER H3T .. | 39           | HUMMER H2 S.. | 43           | Honda Odyss.. | 42           |
+| Honda Odyss.. | 41           | Honda Accor.. | 39           | Honda Accor.. | 38           |
+| Hyundai Vel.. | 41           | Hyundai San.. | 42           | Hyundai Tuc.. | 43           |
+| Hyundai Ver.. | 42           | Hyundai Son.. | 33           | Hyundai Ela.. | 42           |
+| Hyundai Acc.. | 24           | Hyundai Gen.. | 43           | Hyundai Son.. | 39           |
+| Hyundai Ela.. | 42           | Hyundai Aze.. | 42           | Infiniti G .. | 34           |
+| Infiniti QX.. | 32           | Isuzu Ascen.. | 40           | Jaguar XK X.. | 46           |
+| Jeep Patrio.. | 44           | Jeep Wrangl.. | 43           | Jeep Libert.. | 44           |
+| Jeep Grand .. | 45           | Jeep Compas.. | 42           | Lamborghini.. | 36           |
+| Lamborghini.. | 43           | Lamborghini.. | 35           | Lamborghini.. | 44           |
+| Land Rover .. | 42           | Land Rover .. | 42           | Lincoln Tow.. | 39           |
+| MINI Cooper.. | 36           | Maybach Lan.. | 29           | Mazda Tribu.. | 36           |
+| McLaren MP4.. | 44           | Mercedes-Be.. | 48           | Mercedes-Be.. | 45           |
+| Mercedes-Be.. | 36           | Mercedes-Be.. | 43           | Mercedes-Be.. | 44           |
+| Mercedes-Be.. | 41           | Mitsubishi .. | 47           | Nissan Leaf.. | 42           |
+| Nissan NV P.. | 38           | Nissan Juke.. | 44           | Nissan 240S.. | 46           |
+| Plymouth Ne.. | 44           | Porsche Pan.. | 43           | Ram C/V Car.. | 41           |
+| Rolls-Royce.. | 30           | Rolls-Royce.. | 38           | Rolls-Royce.. | 44           |
+| Scion xD Ha.. | 41           | Spyker C8 C.. | 45           | Spyker C8 C.. | 42           |
+| Suzuki Aeri.. | 38           | Suzuki Kiza.. | 46           | Suzuki SX4 .. | 42           |
+| Suzuki SX4 .. | 40           | Tesla Model.. | 38           | Toyota Sequ.. | 38           |
+| Toyota Camr.. | 43           | Toyota Coro.. | 43           | Toyota 4Run.. | 40           |
+| Volkswagen .. | 43           | Volkswagen .. | 46           | Volkswagen .. | 42           |
+| Volvo C30 H.. | 41           | Volvo 240 S.. | 45           | Volvo XC90 .. | 43           |
+| smart fortw.. | 40           |               |              |               |              |
+|     total     | 8041         |               |              |               |              |[0m
+[01/26 13:57:12] d2.evaluation.evaluator INFO: Start inference on 8041 images
+[01/26 13:57:14] d2.evaluation.evaluator INFO: Inference done 50/8041. 0.0242 s / img. ETA=0:03:13
+[01/26 13:57:15] d2.evaluation.evaluator INFO: Inference done 100/8041. 0.0238 s / img. ETA=0:03:09
+[01/26 13:57:16] d2.evaluation.evaluator INFO: Inference done 150/8041. 0.0239 s / img. ETA=0:03:08
+[01/26 13:57:17] d2.evaluation.evaluator INFO: Inference done 200/8041. 0.0238 s / img. ETA=0:03:06
+[01/26 13:57:18] d2.evaluation.evaluator INFO: Inference done 250/8041. 0.0238 s / img. ETA=0:03:05
+[01/26 13:57:20] d2.evaluation.evaluator INFO: Inference done 300/8041. 0.0238 s / img. ETA=0:03:04
+[01/26 13:57:21] d2.evaluation.evaluator INFO: Inference done 350/8041. 0.0238 s / img. ETA=0:03:03
+[01/26 13:57:22] d2.evaluation.evaluator INFO: Inference done 400/8041. 0.0238 s / img. ETA=0:03:01
+[01/26 13:57:23] d2.evaluation.evaluator INFO: Inference done 450/8041. 0.0238 s / img. ETA=0:03:00
+[01/26 13:57:24] d2.evaluation.evaluator INFO: Inference done 500/8041. 0.0239 s / img. ETA=0:03:00
+[01/26 13:57:26] d2.evaluation.evaluator INFO: Inference done 550/8041. 0.0239 s / img. ETA=0:02:58
+[01/26 13:57:27] d2.evaluation.evaluator INFO: Inference done 600/8041. 0.0239 s / img. ETA=0:02:57
+[01/26 13:57:28] d2.evaluation.evaluator INFO: Inference done 650/8041. 0.0239 s / img. ETA=0:02:56
+[01/26 13:57:29] d2.evaluation.evaluator INFO: Inference done 700/8041. 0.0239 s / img. ETA=0:02:55
+[01/26 13:57:30] d2.evaluation.evaluator INFO: Inference done 750/8041. 0.0239 s / img. ETA=0:02:54
+[01/26 13:57:32] d2.evaluation.evaluator INFO: Inference done 800/8041. 0.0239 s / img. ETA=0:02:52
+[01/26 13:57:33] d2.evaluation.evaluator INFO: Inference done 850/8041. 0.0239 s / img. ETA=0:02:51
+[01/26 13:57:34] d2.evaluation.evaluator INFO: Inference done 900/8041. 0.0239 s / img. ETA=0:02:50
+[01/26 13:57:35] d2.evaluation.evaluator INFO: Inference done 950/8041. 0.0239 s / img. ETA=0:02:49
+[01/26 13:57:36] d2.evaluation.evaluator INFO: Inference done 1000/8041. 0.0238 s / img. ETA=0:02:47
+[01/26 13:57:37] d2.evaluation.evaluator INFO: Inference done 1050/8041. 0.0238 s / img. ETA=0:02:46
+[01/26 13:57:39] d2.evaluation.evaluator INFO: Inference done 1100/8041. 0.0238 s / img. ETA=0:02:45
+[01/26 13:57:40] d2.evaluation.evaluator INFO: Inference done 1150/8041. 0.0239 s / img. ETA=0:02:44
+[01/26 13:57:41] d2.evaluation.evaluator INFO: Inference done 1200/8041. 0.0239 s / img. ETA=0:02:43
+[01/26 13:57:42] d2.evaluation.evaluator INFO: Inference done 1250/8041. 0.0239 s / img. ETA=0:02:42
+[01/26 13:57:43] d2.evaluation.evaluator INFO: Inference done 1300/8041. 0.0239 s / img. ETA=0:02:41
+[01/26 13:57:45] d2.evaluation.evaluator INFO: Inference done 1350/8041. 0.0239 s / img. ETA=0:02:39
+[01/26 13:57:46] d2.evaluation.evaluator INFO: Inference done 1400/8041. 0.0239 s / img. ETA=0:02:38
+[01/26 13:57:47] d2.evaluation.evaluator INFO: Inference done 1450/8041. 0.0239 s / img. ETA=0:02:37
+[01/26 13:57:48] d2.evaluation.evaluator INFO: Inference done 1500/8041. 0.0239 s / img. ETA=0:02:36
+[01/26 13:57:49] d2.evaluation.evaluator INFO: Inference done 1550/8041. 0.0238 s / img. ETA=0:02:34
+[01/26 13:57:51] d2.evaluation.evaluator INFO: Inference done 1600/8041. 0.0238 s / img. ETA=0:02:33
+[01/26 13:57:52] d2.evaluation.evaluator INFO: Inference done 1650/8041. 0.0238 s / img. ETA=0:02:32
+[01/26 13:57:53] d2.evaluation.evaluator INFO: Inference done 1700/8041. 0.0238 s / img. ETA=0:02:31
+[01/26 13:57:54] d2.evaluation.evaluator INFO: Inference done 1750/8041. 0.0238 s / img. ETA=0:02:29
+[01/26 13:57:55] d2.evaluation.evaluator INFO: Inference done 1800/8041. 0.0238 s / img. ETA=0:02:28
+[01/26 13:57:57] d2.evaluation.evaluator INFO: Inference done 1850/8041. 0.0238 s / img. ETA=0:02:27
+[01/26 13:57:58] d2.evaluation.evaluator INFO: Inference done 1900/8041. 0.0238 s / img. ETA=0:02:26
+[01/26 13:57:59] d2.evaluation.evaluator INFO: Inference done 1950/8041. 0.0238 s / img. ETA=0:02:25
+[01/26 13:58:00] d2.evaluation.evaluator INFO: Inference done 2000/8041. 0.0238 s / img. ETA=0:02:23
+[01/26 13:58:01] d2.evaluation.evaluator INFO: Inference done 2050/8041. 0.0238 s / img. ETA=0:02:22
+[01/26 13:58:02] d2.evaluation.evaluator INFO: Inference done 2100/8041. 0.0238 s / img. ETA=0:02:21
+[01/26 13:58:04] d2.evaluation.evaluator INFO: Inference done 2150/8041. 0.0238 s / img. ETA=0:02:20
+[01/26 13:58:05] d2.evaluation.evaluator INFO: Inference done 2200/8041. 0.0238 s / img. ETA=0:02:18
+[01/26 13:58:06] d2.evaluation.evaluator INFO: Inference done 2250/8041. 0.0238 s / img. ETA=0:02:17
+[01/26 13:58:07] d2.evaluation.evaluator INFO: Inference done 2300/8041. 0.0238 s / img. ETA=0:02:16
+[01/26 13:58:08] d2.evaluation.evaluator INFO: Inference done 2350/8041. 0.0238 s / img. ETA=0:02:15
+[01/26 13:58:10] d2.evaluation.evaluator INFO: Inference done 2400/8041. 0.0238 s / img. ETA=0:02:14
+[01/26 13:58:11] d2.evaluation.evaluator INFO: Inference done 2450/8041. 0.0238 s / img. ETA=0:02:12
+[01/26 13:58:12] d2.evaluation.evaluator INFO: Inference done 2500/8041. 0.0238 s / img. ETA=0:02:11
+[01/26 13:58:13] d2.evaluation.evaluator INFO: Inference done 2550/8041. 0.0238 s / img. ETA=0:02:10
+[01/26 13:58:14] d2.evaluation.evaluator INFO: Inference done 2600/8041. 0.0238 s / img. ETA=0:02:09
+[01/26 13:58:16] d2.evaluation.evaluator INFO: Inference done 2650/8041. 0.0238 s / img. ETA=0:02:08
+[01/26 13:58:17] d2.evaluation.evaluator INFO: Inference done 2700/8041. 0.0238 s / img. ETA=0:02:07
+[01/26 13:58:18] d2.evaluation.evaluator INFO: Inference done 2750/8041. 0.0238 s / img. ETA=0:02:06
+[01/26 13:58:19] d2.evaluation.evaluator INFO: Inference done 2800/8041. 0.0238 s / img. ETA=0:02:04
+[01/26 13:58:20] d2.evaluation.evaluator INFO: Inference done 2850/8041. 0.0238 s / img. ETA=0:02:03
+[01/26 13:58:22] d2.evaluation.evaluator INFO: Inference done 2900/8041. 0.0238 s / img. ETA=0:02:02
+[01/26 13:58:23] d2.evaluation.evaluator INFO: Inference done 2950/8041. 0.0238 s / img. ETA=0:02:01
+[01/26 13:58:24] d2.evaluation.evaluator INFO: Inference done 3000/8041. 0.0239 s / img. ETA=0:02:00
+[01/26 13:58:25] d2.evaluation.evaluator INFO: Inference done 3050/8041. 0.0239 s / img. ETA=0:01:59
+[01/26 13:58:26] d2.evaluation.evaluator INFO: Inference done 3100/8041. 0.0239 s / img. ETA=0:01:57
+[01/26 13:58:28] d2.evaluation.evaluator INFO: Inference done 3150/8041. 0.0239 s / img. ETA=0:01:56
+[01/26 13:58:29] d2.evaluation.evaluator INFO: Inference done 3200/8041. 0.0239 s / img. ETA=0:01:55
+[01/26 13:58:30] d2.evaluation.evaluator INFO: Inference done 3250/8041. 0.0239 s / img. ETA=0:01:54
+[01/26 13:58:31] d2.evaluation.evaluator INFO: Inference done 3300/8041. 0.0239 s / img. ETA=0:01:53
+[01/26 13:58:32] d2.evaluation.evaluator INFO: Inference done 3350/8041. 0.0239 s / img. ETA=0:01:52
+[01/26 13:58:34] d2.evaluation.evaluator INFO: Inference done 3400/8041. 0.0239 s / img. ETA=0:01:50
+[01/26 13:58:35] d2.evaluation.evaluator INFO: Inference done 3450/8041. 0.0239 s / img. ETA=0:01:49
+[01/26 13:58:36] d2.evaluation.evaluator INFO: Inference done 3500/8041. 0.0239 s / img. ETA=0:01:48
+[01/26 13:58:37] d2.evaluation.evaluator INFO: Inference done 3550/8041. 0.0239 s / img. ETA=0:01:47
+[01/26 13:58:38] d2.evaluation.evaluator INFO: Inference done 3600/8041. 0.0239 s / img. ETA=0:01:46
+[01/26 13:58:40] d2.evaluation.evaluator INFO: Inference done 3650/8041. 0.0239 s / img. ETA=0:01:44
+[01/26 13:58:41] d2.evaluation.evaluator INFO: Inference done 3700/8041. 0.0239 s / img. ETA=0:01:43
+[01/26 13:58:42] d2.evaluation.evaluator INFO: Inference done 3750/8041. 0.0239 s / img. ETA=0:01:42
+[01/26 13:58:43] d2.evaluation.evaluator INFO: Inference done 3800/8041. 0.0239 s / img. ETA=0:01:41
+[01/26 13:58:45] d2.evaluation.evaluator INFO: Inference done 3850/8041. 0.0239 s / img. ETA=0:01:40
+[01/26 13:58:46] d2.evaluation.evaluator INFO: Inference done 3900/8041. 0.0239 s / img. ETA=0:01:39
+[01/26 13:58:47] d2.evaluation.evaluator INFO: Inference done 3950/8041. 0.0239 s / img. ETA=0:01:37
+[01/26 13:58:48] d2.evaluation.evaluator INFO: Inference done 4000/8041. 0.0240 s / img. ETA=0:01:36
+[01/26 13:58:50] d2.evaluation.evaluator INFO: Inference done 4050/8041. 0.0240 s / img. ETA=0:01:35
+[01/26 13:58:51] d2.evaluation.evaluator INFO: Inference done 4100/8041. 0.0240 s / img. ETA=0:01:34
+[01/26 13:58:52] d2.evaluation.evaluator INFO: Inference done 4150/8041. 0.0240 s / img. ETA=0:01:33
+[01/26 13:58:53] d2.evaluation.evaluator INFO: Inference done 4200/8041. 0.0240 s / img. ETA=0:01:32
+[01/26 13:58:55] d2.evaluation.evaluator INFO: Inference done 4250/8041. 0.0240 s / img. ETA=0:01:31
+[01/26 13:58:56] d2.evaluation.evaluator INFO: Inference done 4300/8041. 0.0240 s / img. ETA=0:01:29
+[01/26 13:58:57] d2.evaluation.evaluator INFO: Inference done 4350/8041. 0.0241 s / img. ETA=0:01:28
+[01/26 13:58:58] d2.evaluation.evaluator INFO: Inference done 4400/8041. 0.0241 s / img. ETA=0:01:27
+[01/26 13:59:00] d2.evaluation.evaluator INFO: Inference done 4450/8041. 0.0241 s / img. ETA=0:01:26
+[01/26 13:59:01] d2.evaluation.evaluator INFO: Inference done 4500/8041. 0.0241 s / img. ETA=0:01:25
+[01/26 13:59:02] d2.evaluation.evaluator INFO: Inference done 4550/8041. 0.0241 s / img. ETA=0:01:24
+[01/26 13:59:03] d2.evaluation.evaluator INFO: Inference done 4600/8041. 0.0241 s / img. ETA=0:01:22
+[01/26 13:59:05] d2.evaluation.evaluator INFO: Inference done 4650/8041. 0.0241 s / img. ETA=0:01:21
+[01/26 13:59:06] d2.evaluation.evaluator INFO: Inference done 4700/8041. 0.0241 s / img. ETA=0:01:20
+[01/26 13:59:07] d2.evaluation.evaluator INFO: Inference done 4750/8041. 0.0241 s / img. ETA=0:01:19
+[01/26 13:59:08] d2.evaluation.evaluator INFO: Inference done 4800/8041. 0.0241 s / img. ETA=0:01:18
+[01/26 13:59:10] d2.evaluation.evaluator INFO: Inference done 4850/8041. 0.0241 s / img. ETA=0:01:17
+[01/26 13:59:11] d2.evaluation.evaluator INFO: Inference done 4900/8041. 0.0242 s / img. ETA=0:01:15
+[01/26 13:59:12] d2.evaluation.evaluator INFO: Inference done 4950/8041. 0.0242 s / img. ETA=0:01:14
+[01/26 13:59:13] d2.evaluation.evaluator INFO: Inference done 5000/8041. 0.0242 s / img. ETA=0:01:13
+[01/26 13:59:15] d2.evaluation.evaluator INFO: Inference done 5050/8041. 0.0242 s / img. ETA=0:01:12
+[01/26 13:59:16] d2.evaluation.evaluator INFO: Inference done 5100/8041. 0.0242 s / img. ETA=0:01:11
+[01/26 13:59:17] d2.evaluation.evaluator INFO: Inference done 5150/8041. 0.0242 s / img. ETA=0:01:09
+[01/26 13:59:18] d2.evaluation.evaluator INFO: Inference done 5200/8041. 0.0242 s / img. ETA=0:01:08
+[01/26 13:59:19] d2.evaluation.evaluator INFO: Inference done 5250/8041. 0.0242 s / img. ETA=0:01:07
+[01/26 13:59:21] d2.evaluation.evaluator INFO: Inference done 5300/8041. 0.0242 s / img. ETA=0:01:06
+[01/26 13:59:22] d2.evaluation.evaluator INFO: Inference done 5350/8041. 0.0242 s / img. ETA=0:01:05
+[01/26 13:59:23] d2.evaluation.evaluator INFO: Inference done 5400/8041. 0.0242 s / img. ETA=0:01:03
+[01/26 13:59:24] d2.evaluation.evaluator INFO: Inference done 5450/8041. 0.0242 s / img. ETA=0:01:02
+[01/26 13:59:25] d2.evaluation.evaluator INFO: Inference done 5500/8041. 0.0242 s / img. ETA=0:01:01
+[01/26 13:59:27] d2.evaluation.evaluator INFO: Inference done 5550/8041. 0.0242 s / img. ETA=0:01:00
+[01/26 13:59:28] d2.evaluation.evaluator INFO: Inference done 5600/8041. 0.0242 s / img. ETA=0:00:59
+[01/26 13:59:29] d2.evaluation.evaluator INFO: Inference done 5650/8041. 0.0242 s / img. ETA=0:00:57
+[01/26 13:59:30] d2.evaluation.evaluator INFO: Inference done 5700/8041. 0.0242 s / img. ETA=0:00:56
+[01/26 13:59:32] d2.evaluation.evaluator INFO: Inference done 5750/8041. 0.0242 s / img. ETA=0:00:55
+[01/26 13:59:33] d2.evaluation.evaluator INFO: Inference done 5800/8041. 0.0242 s / img. ETA=0:00:54
+[01/26 13:59:34] d2.evaluation.evaluator INFO: Inference done 5850/8041. 0.0242 s / img. ETA=0:00:52
+[01/26 13:59:35] d2.evaluation.evaluator INFO: Inference done 5900/8041. 0.0242 s / img. ETA=0:00:51
+[01/26 13:59:36] d2.evaluation.evaluator INFO: Inference done 5950/8041. 0.0242 s / img. ETA=0:00:50
+[01/26 13:59:38] d2.evaluation.evaluator INFO: Inference done 6000/8041. 0.0242 s / img. ETA=0:00:49
+[01/26 13:59:39] d2.evaluation.evaluator INFO: Inference done 6050/8041. 0.0242 s / img. ETA=0:00:48
+[01/26 13:59:40] d2.evaluation.evaluator INFO: Inference done 6100/8041. 0.0242 s / img. ETA=0:00:46
+[01/26 13:59:41] d2.evaluation.evaluator INFO: Inference done 6150/8041. 0.0242 s / img. ETA=0:00:45
+[01/26 13:59:42] d2.evaluation.evaluator INFO: Inference done 6200/8041. 0.0242 s / img. ETA=0:00:44
+[01/26 13:59:44] d2.evaluation.evaluator INFO: Inference done 6250/8041. 0.0242 s / img. ETA=0:00:43
+[01/26 13:59:45] d2.evaluation.evaluator INFO: Inference done 6300/8041. 0.0242 s / img. ETA=0:00:42
+[01/26 13:59:46] d2.evaluation.evaluator INFO: Inference done 6350/8041. 0.0242 s / img. ETA=0:00:40
+[01/26 13:59:47] d2.evaluation.evaluator INFO: Inference done 6400/8041. 0.0242 s / img. ETA=0:00:39
+[01/26 13:59:48] d2.evaluation.evaluator INFO: Inference done 6450/8041. 0.0242 s / img. ETA=0:00:38
+[01/26 13:59:50] d2.evaluation.evaluator INFO: Inference done 6500/8041. 0.0242 s / img. ETA=0:00:37
+[01/26 13:59:51] d2.evaluation.evaluator INFO: Inference done 6550/8041. 0.0242 s / img. ETA=0:00:36
+[01/26 13:59:52] d2.evaluation.evaluator INFO: Inference done 6600/8041. 0.0242 s / img. ETA=0:00:34
+[01/26 13:59:53] d2.evaluation.evaluator INFO: Inference done 6650/8041. 0.0242 s / img. ETA=0:00:33
+[01/26 13:59:55] d2.evaluation.evaluator INFO: Inference done 6700/8041. 0.0242 s / img. ETA=0:00:32
+[01/26 13:59:56] d2.evaluation.evaluator INFO: Inference done 6750/8041. 0.0242 s / img. ETA=0:00:31
+[01/26 13:59:57] d2.evaluation.evaluator INFO: Inference done 6800/8041. 0.0242 s / img. ETA=0:00:30
+[01/26 13:59:58] d2.evaluation.evaluator INFO: Inference done 6850/8041. 0.0242 s / img. ETA=0:00:28
+[01/26 13:59:59] d2.evaluation.evaluator INFO: Inference done 6900/8041. 0.0242 s / img. ETA=0:00:27
+[01/26 14:00:01] d2.evaluation.evaluator INFO: Inference done 6950/8041. 0.0242 s / img. ETA=0:00:26
+[01/26 14:00:02] d2.evaluation.evaluator INFO: Inference done 7000/8041. 0.0242 s / img. ETA=0:00:25
+[01/26 14:00:03] d2.evaluation.evaluator INFO: Inference done 7050/8041. 0.0242 s / img. ETA=0:00:23
+[01/26 14:00:04] d2.evaluation.evaluator INFO: Inference done 7100/8041. 0.0242 s / img. ETA=0:00:22
+[01/26 14:00:05] d2.evaluation.evaluator INFO: Inference done 7150/8041. 0.0242 s / img. ETA=0:00:21
+[01/26 14:00:07] d2.evaluation.evaluator INFO: Inference done 7200/8041. 0.0242 s / img. ETA=0:00:20
+[01/26 14:00:08] d2.evaluation.evaluator INFO: Inference done 7250/8041. 0.0242 s / img. ETA=0:00:19
+[01/26 14:00:09] d2.evaluation.evaluator INFO: Inference done 7300/8041. 0.0242 s / img. ETA=0:00:17
+[01/26 14:00:10] d2.evaluation.evaluator INFO: Inference done 7350/8041. 0.0242 s / img. ETA=0:00:16
+[01/26 14:00:12] d2.evaluation.evaluator INFO: Inference done 7400/8041. 0.0242 s / img. ETA=0:00:15
+[01/26 14:00:13] d2.evaluation.evaluator INFO: Inference done 7450/8041. 0.0242 s / img. ETA=0:00:14
+[01/26 14:00:14] d2.evaluation.evaluator INFO: Inference done 7500/8041. 0.0242 s / img. ETA=0:00:13
+[01/26 14:00:15] d2.evaluation.evaluator INFO: Inference done 7550/8041. 0.0242 s / img. ETA=0:00:11
+[01/26 14:00:16] d2.evaluation.evaluator INFO: Inference done 7600/8041. 0.0242 s / img. ETA=0:00:10
+[01/26 14:00:18] d2.evaluation.evaluator INFO: Inference done 7650/8041. 0.0242 s / img. ETA=0:00:09
+[01/26 14:00:19] d2.evaluation.evaluator INFO: Inference done 7700/8041. 0.0242 s / img. ETA=0:00:08
+[01/26 14:00:20] d2.evaluation.evaluator INFO: Inference done 7750/8041. 0.0242 s / img. ETA=0:00:07
+[01/26 14:00:21] d2.evaluation.evaluator INFO: Inference done 7800/8041. 0.0242 s / img. ETA=0:00:05
+[01/26 14:00:23] d2.evaluation.evaluator INFO: Inference done 7850/8041. 0.0242 s / img. ETA=0:00:04
+[01/26 14:00:24] d2.evaluation.evaluator INFO: Inference done 7900/8041. 0.0242 s / img. ETA=0:00:03
+[01/26 14:00:25] d2.evaluation.evaluator INFO: Inference done 7950/8041. 0.0242 s / img. ETA=0:00:02
+[01/26 14:00:26] d2.evaluation.evaluator INFO: Inference done 8000/8041. 0.0242 s / img. ETA=0:00:00
+[01/26 14:00:27] d2.evaluation.evaluator INFO: Total inference time: 0:03:14 (0.024141 s / img per device, on 1 devices)
+[01/26 14:00:27] d2.evaluation.evaluator INFO: Total inference pure compute time: 0:02:59 (0.022374 s / img per device, on 1 devices)
+[01/26 14:00:28] d2.evaluation.coco_evaluation INFO: Preparing results for COCO format ...
+[01/26 14:00:28] d2.evaluation.coco_evaluation INFO: Saving results to /home/roadzen/ParasWork/ConUHack2020/data/evaluationDamageModels/model_final/inference/coco_instances_results.json
+[01/26 14:00:28] d2.evaluation.coco_evaluation INFO: Evaluating predictions ...
+[01/26 14:00:47] d2.evaluation.coco_evaluation INFO: Evaluation results for bbox: 
+|   AP   |  AP50  |  AP75  |   APs    |  APm  |  APl   |
+|:------:|:------:|:------:|:--------:|:-----:|:------:|
+| 78.822 | 85.219 | 84.559 | -100.000 | 0.000 | 78.832 |
+[01/26 14:00:47] d2.evaluation.coco_evaluation INFO: Per-category bbox AP: 
+| category                                            | AP     | category                                        | AP     | category                                               | AP     |
+|:----------------------------------------------------|:-------|:------------------------------------------------|:-------|:-------------------------------------------------------|:-------|
+| AM General Hummer SUV 2000                          | 81.940 | Acura RL Sedan 2012                             | 56.941 | Acura TL Sedan 2012                                    | 66.795 |
+| Acura TL Type-S 2008                                | 93.203 | Acura TSX Sedan 2012                            | 73.797 | Acura Integra Type R 2001                              | 82.411 |
+| Acura ZDX Hatchback 2012                            | 72.034 | Aston Martin V8 Vantage Convertible 2012        | 71.810 | Aston Martin V8 Vantage Coupe 2012                     | 74.150 |
+| Aston Martin Virage Convertible 2012                | 76.566 | Aston Martin Virage Coupe 2012                  | 79.992 | Audi RS 4 Convertible 2008                             | 83.369 |
+| Audi A5 Coupe 2012                                  | 74.744 | Audi TTS Coupe 2012                             | 48.882 | Audi R8 Coupe 2012                                     | 82.604 |
+| Audi V8 Sedan 1994                                  | 60.166 | Audi 100 Sedan 1994                             | 60.730 | Audi 100 Wagon 1994                                    | 63.912 |
+| Audi TT Hatchback 2011                              | 52.203 | Audi S6 Sedan 2011                              | 83.190 | Audi S5 Convertible 2012                               | 69.718 |
+| Audi S5 Coupe 2012                                  | 58.240 | Audi S4 Sedan 2012                              | 57.314 | Audi S4 Sedan 2007                                     | 77.065 |
+| Audi TT RS Coupe 2012                               | 71.513 | BMW ActiveHybrid 5 Sedan 2012                   | 83.524 | BMW 1 Series Convertible 2012                          | 85.664 |
+| BMW 1 Series Coupe 2012                             | 73.662 | BMW 3 Series Sedan 2012                         | 64.289 | BMW 3 Series Wagon 2012                                | 68.563 |
+| BMW 6 Series Convertible 2007                       | 65.503 | BMW X5 SUV 2007                                 | 73.570 | BMW X6 SUV 2012                                        | 88.816 |
+| BMW M3 Coupe 2012                                   | 81.646 | BMW M5 Sedan 2010                               | 85.914 | BMW M6 Convertible 2010                                | 56.300 |
+| BMW X3 SUV 2012                                     | 90.572 | BMW Z4 Convertible 2012                         | 79.454 | Bentley Continental Supersports Conv. Convertible 2012 | 74.128 |
+| Bentley Arnage Sedan 2009                           | 89.456 | Bentley Mulsanne Sedan 2011                     | 90.510 | Bentley Continental GT Coupe 2012                      | 71.216 |
+| Bentley Continental GT Coupe 2007                   | 69.846 | Bentley Continental Flying Spur Sedan 2007      | 83.115 | Bugatti Veyron 16.4 Convertible 2009                   | 64.505 |
+| Bugatti Veyron 16.4 Coupe 2009                      | 82.305 | Buick Regal GS 2012                             | 82.829 | Buick Rainier SUV 2007                                 | 86.445 |
+| Buick Verano Sedan 2012                             | 89.946 | Buick Enclave SUV 2012                          | 89.837 | Cadillac CTS-V Sedan 2012                              | 88.219 |
+| Cadillac SRX SUV 2012                               | 88.795 | Cadillac Escalade EXT Crew Cab 2007             | 73.303 | Chevrolet Silverado 1500 Hybrid Crew Cab 2012          | 70.161 |
+| Chevrolet Corvette Convertible 2012                 | 78.714 | Chevrolet Corvette ZR1 2012                     | 70.336 | Chevrolet Corvette Ron Fellows Edition Z06 2007        | 79.171 |
+| Chevrolet Traverse SUV 2012                         | 83.596 | Chevrolet Camaro Convertible 2012               | 81.131 | Chevrolet HHR SS 2010                                  | 89.184 |
+| Chevrolet Impala Sedan 2007                         | 80.444 | Chevrolet Tahoe Hybrid SUV 2012                 | 78.504 | Chevrolet Sonic Sedan 2012                             | 81.000 |
+| Chevrolet Express Cargo Van 2007                    | 34.134 | Chevrolet Avalanche Crew Cab 2012               | 86.731 | Chevrolet Cobalt SS 2010                               | 71.013 |
+| Chevrolet Malibu Hybrid Sedan 2010                  | 88.585 | Chevrolet TrailBlazer SS 2009                   | 90.955 | Chevrolet Silverado 2500HD Regular Cab 2012            | 61.446 |
+| Chevrolet Silverado 1500 Classic Extended Cab 2007  | 80.823 | Chevrolet Express Van 2007                      | 40.460 | Chevrolet Monte Carlo Coupe 2007                       | 74.899 |
+| Chevrolet Malibu Sedan 2007                         | 66.150 | Chevrolet Silverado 1500 Extended Cab 2012      | 68.708 | Chevrolet Silverado 1500 Regular Cab 2012              | 65.694 |
+| Chrysler Aspen SUV 2009                             | 71.579 | Chrysler Sebring Convertible 2010               | 84.057 | Chrysler Town and Country Minivan 2012                 | 86.392 |
+| Chrysler 300 SRT-8 2010                             | 74.914 | Chrysler Crossfire Convertible 2008             | 89.999 | Chrysler PT Cruiser Convertible 2008                   | 86.967 |
+| Daewoo Nubira Wagon 2002                            | 90.712 | Dodge Caliber Wagon 2012                        | 56.345 | Dodge Caliber Wagon 2007                               | 55.364 |
+| Dodge Caravan Minivan 1997                          | 93.634 | Dodge Ram Pickup 3500 Crew Cab 2010             | 85.528 | Dodge Ram Pickup 3500 Quad Cab 2009                    | 72.957 |
+| Dodge Sprinter Cargo Van 2009                       | 72.794 | Dodge Journey SUV 2012                          | 92.355 | Dodge Dakota Crew Cab 2010                             | 73.614 |
+| Dodge Dakota Club Cab 2007                          | 85.042 | Dodge Magnum Wagon 2008                         | 82.019 | Dodge Challenger SRT8 2011                             | 90.701 |
+| Dodge Durango SUV 2012                              | 93.149 | Dodge Durango SUV 2007                          | 75.244 | Dodge Charger Sedan 2012                               | 85.073 |
+| Dodge Charger SRT-8 2009                            | 81.577 | Eagle Talon Hatchback 1998                      | 80.019 | FIAT 500 Abarth 2012                                   | 86.006 |
+| FIAT 500 Convertible 2012                           | 73.956 | Ferrari FF Coupe 2012                           | 76.540 | Ferrari California Convertible 2012                    | 81.834 |
+| Ferrari 458 Italia Convertible 2012                 | 75.699 | Ferrari 458 Italia Coupe 2012                   | 81.506 | Fisker Karma Sedan 2012                                | 84.719 |
+| Ford F-450 Super Duty Crew Cab 2012                 | 90.422 | Ford Mustang Convertible 2007                   | 81.421 | Ford Freestar Minivan 2007                             | 79.995 |
+| Ford Expedition EL SUV 2009                         | 87.281 | Ford Edge SUV 2012                              | 82.336 | Ford Ranger SuperCab 2011                              | 94.234 |
+| Ford GT Coupe 2006                                  | 76.844 | Ford F-150 Regular Cab 2012                     | 91.997 | Ford F-150 Regular Cab 2007                            | 80.525 |
+| Ford Focus Sedan 2007                               | 81.425 | Ford E-Series Wagon Van 2012                    | 88.799 | Ford Fiesta Sedan 2012                                 | 85.546 |
+| GMC Terrain SUV 2012                                | 84.287 | GMC Savana Van 2012                             | 76.892 | GMC Yukon Hybrid SUV 2012                              | 79.788 |
+| GMC Acadia SUV 2012                                 | 84.189 | GMC Canyon Extended Cab 2012                    | 73.979 | Geo Metro Convertible 1993                             | 77.944 |
+| HUMMER H3T Crew Cab 2010                            | 74.633 | HUMMER H2 SUT Crew Cab 2009                     | 85.716 | Honda Odyssey Minivan 2012                             | 89.366 |
+| Honda Odyssey Minivan 2007                          | 90.588 | Honda Accord Coupe 2012                         | 75.640 | Honda Accord Sedan 2012                                | 71.767 |
+| Hyundai Veloster Hatchback 2012                     | 87.394 | Hyundai Santa Fe SUV 2012                       | 83.626 | Hyundai Tucson SUV 2012                                | 91.124 |
+| Hyundai Veracruz SUV 2012                           | 71.141 | Hyundai Sonata Hybrid Sedan 2012                | 84.963 | Hyundai Elantra Sedan 2007                             | 81.160 |
+| Hyundai Accent Sedan 2012                           | 76.387 | Hyundai Genesis Sedan 2012                      | 83.993 | Hyundai Sonata Sedan 2012                              | 76.377 |
+| Hyundai Elantra Touring Hatchback 2012              | 81.345 | Hyundai Azera Sedan 2012                        | 68.507 | Infiniti G Coupe IPL 2012                              | 83.050 |
+| Infiniti QX56 SUV 2011                              | 91.191 | Isuzu Ascender SUV 2008                         | 79.032 | Jaguar XK XKR 2012                                     | 59.115 |
+| Jeep Patriot SUV 2012                               | 91.338 | Jeep Wrangler SUV 2012                          | 89.718 | Jeep Liberty SUV 2012                                  | 90.143 |
+| Jeep Grand Cherokee SUV 2012                        | 81.392 | Jeep Compass SUV 2012                           | 81.291 | Lamborghini Reventon Coupe 2008                        | 79.590 |
+| Lamborghini Aventador Coupe 2012                    | 69.450 | Lamborghini Gallardo LP 570-4 Superleggera 2012 | 81.382 | Lamborghini Diablo Coupe 2001                          | 80.205 |
+| Land Rover Range Rover SUV 2012                     | 94.840 | Land Rover LR2 SUV 2012                         | 81.395 | Lincoln Town Car Sedan 2011                            | 83.341 |
+| MINI Cooper Roadster Convertible 2012               | 85.452 | Maybach Landaulet Convertible 2012              | 64.654 | Mazda Tribute SUV 2011                                 | 92.817 |
+| McLaren MP4-12C Coupe 2012                          | 91.722 | Mercedes-Benz 300-Class Convertible 1993        | 77.371 | Mercedes-Benz C-Class Sedan 2012                       | 74.844 |
+| Mercedes-Benz SL-Class Coupe 2009                   | 74.868 | Mercedes-Benz E-Class Sedan 2012                | 79.640 | Mercedes-Benz S-Class Sedan 2012                       | 92.367 |
+| Mercedes-Benz Sprinter Van 2012                     | 81.723 | Mitsubishi Lancer Sedan 2012                    | 81.355 | Nissan Leaf Hatchback 2012                             | 87.286 |
+| Nissan NV Passenger Van 2012                        | 76.294 | Nissan Juke Hatchback 2012                      | 87.065 | Nissan 240SX Coupe 1998                                | 82.900 |
+| Plymouth Neon Coupe 1999                            | 87.658 | Porsche Panamera Sedan 2012                     | 85.639 | Ram C/V Cargo Van Minivan 2012                         | 70.765 |
+| Rolls-Royce Phantom Drophead Coupe Convertible 2012 | 75.372 | Rolls-Royce Ghost Sedan 2012                    | 80.026 | Rolls-Royce Phantom Sedan 2012                         | 73.514 |
+| Scion xD Hatchback 2012                             | 77.970 | Spyker C8 Convertible 2009                      | 75.619 | Spyker C8 Coupe 2009                                   | 62.440 |
+| Suzuki Aerio Sedan 2007                             | 80.441 | Suzuki Kizashi Sedan 2012                       | 68.153 | Suzuki SX4 Hatchback 2012                              | 82.029 |
+| Suzuki SX4 Sedan 2012                               | 64.470 | Tesla Model S Sedan 2012                        | 77.905 | Toyota Sequoia SUV 2012                                | 79.413 |
+| Toyota Camry Sedan 2012                             | 82.180 | Toyota Corolla Sedan 2012                       | 71.534 | Toyota 4Runner SUV 2012                                | 89.265 |
+| Volkswagen Golf Hatchback 2012                      | 71.311 | Volkswagen Golf Hatchback 1991                  | 92.429 | Volkswagen Beetle Hatchback 2012                       | 94.631 |
+| Volvo C30 Hatchback 2012                            | 82.223 | Volvo 240 Sedan 1993                            | 90.675 | Volvo XC90 SUV 2007                                    | 89.288 |
+| smart fortwo Convertible 2012                       | 88.409 |                                                 |        |                                                        |        |
+[01/26 14:01:08] d2.evaluation.coco_evaluation INFO: Evaluation results for segm: 
+|   AP   |  AP50  |  AP75  |   APs    |  APm  |  APl   |
+|:------:|:------:|:------:|:--------:|:-----:|:------:|
+| 79.099 | 85.219 | 84.525 | -100.000 | 0.000 | 79.110 |
+[01/26 14:01:08] d2.evaluation.coco_evaluation INFO: Per-category segm AP: 
+| category                                            | AP     | category                                        | AP     | category                                               | AP     |
+|:----------------------------------------------------|:-------|:------------------------------------------------|:-------|:-------------------------------------------------------|:-------|
+| AM General Hummer SUV 2000                          | 82.348 | Acura RL Sedan 2012                             | 57.102 | Acura TL Sedan 2012                                    | 67.257 |
+| Acura TL Type-S 2008                                | 93.464 | Acura TSX Sedan 2012                            | 74.662 | Acura Integra Type R 2001                              | 82.562 |
+| Acura ZDX Hatchback 2012                            | 71.567 | Aston Martin V8 Vantage Convertible 2012        | 72.237 | Aston Martin V8 Vantage Coupe 2012                     | 74.394 |
+| Aston Martin Virage Convertible 2012                | 77.170 | Aston Martin Virage Coupe 2012                  | 80.084 | Audi RS 4 Convertible 2008                             | 83.369 |
+| Audi A5 Coupe 2012                                  | 74.928 | Audi TTS Coupe 2012                             | 48.761 | Audi R8 Coupe 2012                                     | 82.966 |
+| Audi V8 Sedan 1994                                  | 60.704 | Audi 100 Sedan 1994                             | 60.402 | Audi 100 Wagon 1994                                    | 64.147 |
+| Audi TT Hatchback 2011                              | 52.247 | Audi S6 Sedan 2011                              | 83.584 | Audi S5 Convertible 2012                               | 69.759 |
+| Audi S5 Coupe 2012                                  | 58.939 | Audi S4 Sedan 2012                              | 57.275 | Audi S4 Sedan 2007                                     | 76.896 |
+| Audi TT RS Coupe 2012                               | 72.723 | BMW ActiveHybrid 5 Sedan 2012                   | 83.996 | BMW 1 Series Convertible 2012                          | 85.364 |
+| BMW 1 Series Coupe 2012                             | 73.711 | BMW 3 Series Sedan 2012                         | 64.195 | BMW 3 Series Wagon 2012                                | 67.930 |
+| BMW 6 Series Convertible 2007                       | 65.960 | BMW X5 SUV 2007                                 | 73.755 | BMW X6 SUV 2012                                        | 89.552 |
+| BMW M3 Coupe 2012                                   | 82.354 | BMW M5 Sedan 2010                               | 87.899 | BMW M6 Convertible 2010                                | 56.910 |
+| BMW X3 SUV 2012                                     | 90.572 | BMW Z4 Convertible 2012                         | 79.634 | Bentley Continental Supersports Conv. Convertible 2012 | 74.387 |
+| Bentley Arnage Sedan 2009                           | 89.513 | Bentley Mulsanne Sedan 2011                     | 90.250 | Bentley Continental GT Coupe 2012                      | 71.783 |
+| Bentley Continental GT Coupe 2007                   | 69.476 | Bentley Continental Flying Spur Sedan 2007      | 82.503 | Bugatti Veyron 16.4 Convertible 2009                   | 66.185 |
+| Bugatti Veyron 16.4 Coupe 2009                      | 82.705 | Buick Regal GS 2012                             | 83.579 | Buick Rainier SUV 2007                                 | 87.029 |
+| Buick Verano Sedan 2012                             | 91.383 | Buick Enclave SUV 2012                          | 89.495 | Cadillac CTS-V Sedan 2012                              | 88.658 |
+| Cadillac SRX SUV 2012                               | 89.227 | Cadillac Escalade EXT Crew Cab 2007             | 73.406 | Chevrolet Silverado 1500 Hybrid Crew Cab 2012          | 70.355 |
+| Chevrolet Corvette Convertible 2012                 | 79.030 | Chevrolet Corvette ZR1 2012                     | 71.240 | Chevrolet Corvette Ron Fellows Edition Z06 2007        | 81.060 |
+| Chevrolet Traverse SUV 2012                         | 84.067 | Chevrolet Camaro Convertible 2012               | 81.582 | Chevrolet HHR SS 2010                                  | 89.672 |
+| Chevrolet Impala Sedan 2007                         | 80.444 | Chevrolet Tahoe Hybrid SUV 2012                 | 78.504 | Chevrolet Sonic Sedan 2012                             | 81.428 |
+| Chevrolet Express Cargo Van 2007                    | 34.775 | Chevrolet Avalanche Crew Cab 2012               | 87.506 | Chevrolet Cobalt SS 2010                               | 70.511 |
+| Chevrolet Malibu Hybrid Sedan 2010                  | 88.757 | Chevrolet TrailBlazer SS 2009                   | 90.230 | Chevrolet Silverado 2500HD Regular Cab 2012            | 61.621 |
+| Chevrolet Silverado 1500 Classic Extended Cab 2007  | 81.499 | Chevrolet Express Van 2007                      | 40.738 | Chevrolet Monte Carlo Coupe 2007                       | 75.033 |
+| Chevrolet Malibu Sedan 2007                         | 66.632 | Chevrolet Silverado 1500 Extended Cab 2012      | 69.054 | Chevrolet Silverado 1500 Regular Cab 2012              | 66.244 |
+| Chrysler Aspen SUV 2009                             | 72.418 | Chrysler Sebring Convertible 2010               | 84.177 | Chrysler Town and Country Minivan 2012                 | 87.205 |
+| Chrysler 300 SRT-8 2010                             | 75.432 | Chrysler Crossfire Convertible 2008             | 90.684 | Chrysler PT Cruiser Convertible 2008                   | 87.985 |
+| Daewoo Nubira Wagon 2002                            | 90.984 | Dodge Caliber Wagon 2012                        | 56.345 | Dodge Caliber Wagon 2007                               | 55.656 |
+| Dodge Caravan Minivan 1997                          | 93.112 | Dodge Ram Pickup 3500 Crew Cab 2010             | 85.951 | Dodge Ram Pickup 3500 Quad Cab 2009                    | 72.702 |
+| Dodge Sprinter Cargo Van 2009                       | 73.118 | Dodge Journey SUV 2012                          | 92.827 | Dodge Dakota Crew Cab 2010                             | 73.292 |
+| Dodge Dakota Club Cab 2007                          | 85.327 | Dodge Magnum Wagon 2008                         | 81.329 | Dodge Challenger SRT8 2011                             | 91.349 |
+| Dodge Durango SUV 2012                              | 93.565 | Dodge Durango SUV 2007                          | 76.485 | Dodge Charger Sedan 2012                               | 86.034 |
+| Dodge Charger SRT-8 2009                            | 81.987 | Eagle Talon Hatchback 1998                      | 81.048 | FIAT 500 Abarth 2012                                   | 86.006 |
+| FIAT 500 Convertible 2012                           | 74.317 | Ferrari FF Coupe 2012                           | 76.247 | Ferrari California Convertible 2012                    | 82.114 |
+| Ferrari 458 Italia Convertible 2012                 | 76.226 | Ferrari 458 Italia Coupe 2012                   | 81.003 | Fisker Karma Sedan 2012                                | 84.526 |
+| Ford F-450 Super Duty Crew Cab 2012                 | 90.712 | Ford Mustang Convertible 2007                   | 81.837 | Ford Freestar Minivan 2007                             | 80.355 |
+| Ford Expedition EL SUV 2009                         | 87.321 | Ford Edge SUV 2012                              | 81.511 | Ford Ranger SuperCab 2011                              | 94.032 |
+| Ford GT Coupe 2006                                  | 76.607 | Ford F-150 Regular Cab 2012                     | 91.997 | Ford F-150 Regular Cab 2007                            | 80.525 |
+| Ford Focus Sedan 2007                               | 81.842 | Ford E-Series Wagon Van 2012                    | 88.949 | Ford Fiesta Sedan 2012                                 | 85.688 |
+| GMC Terrain SUV 2012                                | 84.493 | GMC Savana Van 2012                             | 77.854 | GMC Yukon Hybrid SUV 2012                              | 80.271 |
+| GMC Acadia SUV 2012                                 | 84.602 | GMC Canyon Extended Cab 2012                    | 74.025 | Geo Metro Convertible 1993                             | 78.169 |
+| HUMMER H3T Crew Cab 2010                            | 75.271 | HUMMER H2 SUT Crew Cab 2009                     | 85.716 | Honda Odyssey Minivan 2012                             | 89.681 |
+| Honda Odyssey Minivan 2007                          | 90.461 | Honda Accord Coupe 2012                         | 76.099 | Honda Accord Sedan 2012                                | 72.004 |
+| Hyundai Veloster Hatchback 2012                     | 88.093 | Hyundai Santa Fe SUV 2012                       | 83.783 | Hyundai Tucson SUV 2012                                | 91.346 |
+| Hyundai Veracruz SUV 2012                           | 71.468 | Hyundai Sonata Hybrid Sedan 2012                | 85.319 | Hyundai Elantra Sedan 2007                             | 81.405 |
+| Hyundai Accent Sedan 2012                           | 77.100 | Hyundai Genesis Sedan 2012                      | 83.763 | Hyundai Sonata Sedan 2012                              | 76.755 |
+| Hyundai Elantra Touring Hatchback 2012              | 81.537 | Hyundai Azera Sedan 2012                        | 68.920 | Infiniti G Coupe IPL 2012                              | 82.775 |
+| Infiniti QX56 SUV 2011                              | 92.206 | Isuzu Ascender SUV 2008                         | 79.157 | Jaguar XK XKR 2012                                     | 58.388 |
+| Jeep Patriot SUV 2012                               | 90.857 | Jeep Wrangler SUV 2012                          | 89.960 | Jeep Liberty SUV 2012                                  | 90.143 |
+| Jeep Grand Cherokee SUV 2012                        | 81.855 | Jeep Compass SUV 2012                           | 81.291 | Lamborghini Reventon Coupe 2008                        | 80.770 |
+| Lamborghini Aventador Coupe 2012                    | 69.493 | Lamborghini Gallardo LP 570-4 Superleggera 2012 | 80.966 | Lamborghini Diablo Coupe 2001                          | 81.829 |
+| Land Rover Range Rover SUV 2012                     | 95.520 | Land Rover LR2 SUV 2012                         | 81.612 | Lincoln Town Car Sedan 2011                            | 85.023 |
+| MINI Cooper Roadster Convertible 2012               | 85.480 | Maybach Landaulet Convertible 2012              | 64.238 | Mazda Tribute SUV 2011                                 | 93.010 |
+| McLaren MP4-12C Coupe 2012                          | 90.574 | Mercedes-Benz 300-Class Convertible 1993        | 77.148 | Mercedes-Benz C-Class Sedan 2012                       | 75.297 |
+| Mercedes-Benz SL-Class Coupe 2009                   | 75.221 | Mercedes-Benz E-Class Sedan 2012                | 80.001 | Mercedes-Benz S-Class Sedan 2012                       | 92.814 |
+| Mercedes-Benz Sprinter Van 2012                     | 82.105 | Mitsubishi Lancer Sedan 2012                    | 81.537 | Nissan Leaf Hatchback 2012                             | 88.107 |
+| Nissan NV Passenger Van 2012                        | 75.592 | Nissan Juke Hatchback 2012                      | 87.610 | Nissan 240SX Coupe 1998                                | 82.900 |
+| Plymouth Neon Coupe 1999                            | 88.256 | Porsche Panamera Sedan 2012                     | 86.412 | Ram C/V Cargo Van Minivan 2012                         | 71.088 |
+| Rolls-Royce Phantom Drophead Coupe Convertible 2012 | 75.372 | Rolls-Royce Ghost Sedan 2012                    | 80.277 | Rolls-Royce Phantom Sedan 2012                         | 73.703 |
+| Scion xD Hatchback 2012                             | 78.330 | Spyker C8 Convertible 2009                      | 75.133 | Spyker C8 Coupe 2009                                   | 62.271 |
+| Suzuki Aerio Sedan 2007                             | 80.441 | Suzuki Kizashi Sedan 2012                       | 69.833 | Suzuki SX4 Hatchback 2012                              | 82.341 |
+| Suzuki SX4 Sedan 2012                               | 64.984 | Tesla Model S Sedan 2012                        | 78.219 | Toyota Sequoia SUV 2012                                | 79.986 |
+| Toyota Camry Sedan 2012                             | 82.785 | Toyota Corolla Sedan 2012                       | 71.093 | Toyota 4Runner SUV 2012                                | 89.668 |
+| Volkswagen Golf Hatchback 2012                      | 72.946 | Volkswagen Golf Hatchback 1991                  | 93.053 | Volkswagen Beetle Hatchback 2012                       | 94.792 |
+| Volvo C30 Hatchback 2012                            | 82.223 | Volvo 240 Sedan 1993                            | 89.707 | Volvo XC90 SUV 2007                                    | 89.288 |
+| smart fortwo Convertible 2012                       | 87.804 |                                                 |        |                                                        |        |
+[01/26 14:01:09] d2.engine.defaults INFO: Evaluation results for car_val in csv format:
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: Task: bbox
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: AP,AP50,AP75,APs,APm,APl
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: 78.8223,85.2194,84.5590,-100.0000,0.0000,78.8323
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: Task: segm
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: AP,AP50,AP75,APs,APm,APl
+[01/26 14:01:09] d2.evaluation.testing INFO: copypaste: 79.0989,85.2194,84.5245,-100.0000,0.0000,79.1104
