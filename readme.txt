@@ -29,7 +29,7 @@ MODEL IS LIVE:
 The model is live and running on a GPU server.
 User can test the model by running test_app.py using python.
 The user has to feed the path of the car image they want to test and the app will fetch the information from server.
-
+Afer the script is run, a pop up window will appear that displays the results.
 
 Instruction to run the model on ur local server:
 
