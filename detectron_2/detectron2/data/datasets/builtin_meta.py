@@ -491,6 +491,8 @@ def _get_coco_panoptic_separated_meta():
 
 
 def _get_builtin_metadata(dataset_name):
+    if dataset_name == "car":
+        return _get_car_instances_meta()
     if dataset_name == "phone":
         return _get_phone_instances_meta()
     if dataset_name == "damage":

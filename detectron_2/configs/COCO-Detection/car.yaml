@@ -1,0 +1,24 @@
+_BASE_: "../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "/home/roadzen/ParasWork/ConUHack2020/data/faster_rcnn_R_50_FPN_3x_coco.pkl"
+  RESNETS:
+    DEPTH: 50
+OUTPUT_DIR: "CarTrainedModels"
+INPUT:
+ MIN_SIZE_TRAIN:
+ - 448
+ MAX_SIZE_TEST: 448
+ MAX_SIZE_TRAIN: 448
+ MIN_SIZE_TEST: 448 
+SOLVER:
+ IMS_PER_BATCH: 2
+ BASE_LR: 0.0025
+ STEPS: (200, 400)
+ MAX_ITER: 100
+ CHECKPOINT_PERIOD: 100
+DATASETS:
+ TRAIN: ("car_train",)
+ TEST: ("car_train",)
+DATALOADER:
+ NUM_WORKERS: 2
+ FILTER_EMPTY_ANNOTATIONS: True
